@@ -19,7 +19,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history";
-import { Router, Route, Switch, Redirect } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 
 import { Provider } from "react-redux";
 import store from "./state/store";
@@ -32,6 +32,7 @@ import "perfect-scrollbar/css/perfect-scrollbar.css";
 import AdminLayout from "layouts/Admin.js";
 import Login from "views/Login";
 import Register from "views/Register";
+import PrivateRoute from "./routing/PrivateRoute";
 
 const hist = createBrowserHistory();
 
@@ -39,10 +40,10 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={hist}>
       <Switch>
+        <Route exact path="/" render={(props) => <Login {...props} />} />
         <Route path="/register" render={(props) => <Register {...props} />} />
         <Route path="/login" render={(props) => <Login {...props} />} />
-        <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-        <Redirect to="/admin/dashboard" />
+        <PrivateRoute path="/admin" component={AdminLayout} />
       </Switch>
     </Router>
   </Provider>,

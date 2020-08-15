@@ -1,5 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+import { loginUser } from "../state/actions/authAction";
+import { connect } from "react-redux";
 
 import {
   Card,
@@ -26,6 +28,11 @@ class Login extends React.Component {
     };
   }
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.loginUser(this.state, this.props.history);
+  };
+
   onChange = (e) => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
@@ -50,7 +57,7 @@ class Login extends React.Component {
                   <CardTitle tag="h5">Login</CardTitle>
                 </CardHeader>
                 <CardBody>
-                  <form>
+                  <form onSubmit={this.handleSubmit}>
                     <FormGroup>
                       <Label for="exampleEmail">Email address</Label>
                       <Input
@@ -96,4 +103,9 @@ class Login extends React.Component {
   }
 }
 
-export default withRouter(Login);
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  error: state.error,
+});
+
+export default connect(mapStateToProps, { loginUser })(withRouter(Login));

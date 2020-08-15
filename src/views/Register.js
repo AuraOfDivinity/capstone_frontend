@@ -1,12 +1,8 @@
 import React from "react";
-
 import { registerUser, confirmOtp } from "../state/actions/authAction";
 import { connect } from "react-redux";
-
 import { withRouter, Link } from "react-router-dom";
-
 import NotificationAlert from "react-notification-alert";
-
 import {
   Card,
   FormGroup,
@@ -20,7 +16,6 @@ import {
   Row,
   Col,
 } from "reactstrap";
-
 import Main from "../assets/img/Main.jpg";
 
 class Register extends React.Component {
@@ -208,7 +203,12 @@ class Register extends React.Component {
                           onChange={this.onChange}
                         />
                       </FormGroup>
-
+                      <FormGroup check>
+                        <FormText color="muted">
+                          Continue to
+                          <Link to={{ pathname: "/login" }}>Login Page</Link>
+                        </FormText>
+                      </FormGroup>
                       <Button
                         color="primary"
                         type="submit"
