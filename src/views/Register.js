@@ -52,13 +52,13 @@ class Register extends React.Component {
         autoDismiss: 7,
       };
       this.notificationAlert.current.notificationAlert(options);
-    } else if (nextProps.user?.userValidated === 0) {
+    } else if (nextProps.error?.msg) {
       let options = {};
       options = {
         place: "br",
         message: (
           <div>
-            <div>The OTP you provided was invalid. Please try again!</div>
+            <div>Invalid OTP. Please try again!</div>
           </div>
         ),
         type: "danger",
@@ -230,6 +230,7 @@ class Register extends React.Component {
 
 const mapStateToProps = (state) => ({
   user: state.user,
+  error: state.error,
 });
 
 export default connect(mapStateToProps, { registerUser, confirmOtp })(
