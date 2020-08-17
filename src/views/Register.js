@@ -43,7 +43,7 @@ class Register extends React.Component {
           <div>
             <div>
               Your account has been successfully created! Please login through
-              the login pagge to continue!
+              the login page to continue!
             </div>
           </div>
         ),
