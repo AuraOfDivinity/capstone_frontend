@@ -2,6 +2,7 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { loginUser } from "../state/actions/authAction";
 import { connect } from "react-redux";
+import NotificationAlert from "react-notification-alert";
 
 import {
   Card,
@@ -27,6 +28,25 @@ class Login extends React.Component {
       password: "",
     };
   }
+  notificationAlert = React.createRef();
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.error?.msg) {
+      let options = {};
+      options = {
+        place: "br",
+        message: (
+          <div>
+            <div>{nextProps.error?.msg}</div>
+          </div>
+        ),
+        type: "danger",
+        icon: "nc-icon nc-bell-55",
+        autoDismiss: 7,
+      };
+      this.notificationAlert.current.notificationAlert(options);
+    }
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -50,6 +70,7 @@ class Login extends React.Component {
             overflow: "hidden",
           }}
         >
+          <NotificationAlert ref={this.notificationAlert} />
           <Row>
             <Col lg="4" md="6" sm="12" style={{ margin: "10% auto" }}>
               <Card>
